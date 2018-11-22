@@ -1,65 +1,75 @@
 <template>
-  <div class="big">
-    <div class="content">
-      <div class="nav">
-        <div><a>My First Deom</a></div>
-      </div>
-        <div class="blok">
-        <div class="utirl blok_input">
-          <input type="text" class="first_input" placeholder= "亲!添加条目" v-model="add_val" @keyup.enter="add_input_val">
-        </div>
-        <div class="utirl blok_div">
-          <div class="add_blok_div" v-show="!arr.length">
-            <div class="add_blok_text"><img src="../assets/seusse.png"/>没有信息，请添加</div>
-          </div>
-        </div>
-        <div class="utirl blok_btn" v-for="item in arr" :key="item.input_val">
-          <div class="add_blok_div">
-            <ul class="add_ul">
-              <li>
-                <div class="add_content">
-                  <label>{{item.input_val}}</label>
-                </div>
-              </li>
-            </ul>
-            <a class="destroy" @click="delete_content(item)">
-              <img src="../assets/error.png"/>
-            </a>
-          </div>
-        </div>
-        <div class="blok_but_remove" @click="clean_whole">清空</div>
-      </div>
-      <div class="footer"></div>
+  <div class="content">
+    <div class="nav">
+      <a>My First Deom</a>
     </div>
+    <div class="container">
+        <div class="general container-input">
+          <input
+           type="text"
+           class="first-input"
+           placeholder= "请添加条目！"
+           v-model="add_val"
+           @keyup.enter="addInputVal"
+          />
+        </div>
+
+        <div class="general container-div">
+          <div class="add-container" v-show="!arrGetValue.length">
+            <div class="add-container-text">
+              <img src="../assets/success.png"/>
+              没有信息，请添加
+            </div>
+          </div>
+        </div>
+
+        <ul class="add-ul">
+          <li  class="add-content add-container" v-for="item in arrGetValue" :key="item.input_val">
+            <label>{{item.input_val}}</label>
+              <a class="destroy" @click="deleteContent(item)">
+                <img src="../assets/error.png"/>
+              </a>
+          </li>
+        </ul>
+
+        <div class="container-btn-remove" @click="cleanAll">清空</div>
+    </div>
+    <div class="footer"></div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'myFirstDemo',
   data () {
     return {
-      arr: [],
+      arrGetValue: [],
       add_val: ''
     }
   },
+
   methods: {
-    // 添加的方法
-    add_input_val () {
-      this.arr.push({
-        input_val: this.add_val
-      })
-      this.add_val = ''
+    // 添加的方法ghjgh
+    addInputVal () {
+      if (this.add_val === '') {
+        alert('请输入')
+      } else {
+        this.arrGetValue.push({
+          input_val: this.add_val
+        })
+        this.add_val = ''
+      }
     },
     // 删除的方法
-    delete_content (data) {
-      let index = this.arr.indexOf(data)
-      this.arr.splice(index, 1)
+    deleteContent (data) {
+      let index = this.arrGetValue.indexOf(data)
+      this.arrGetValue.splice(index, 1)
     },
     // 清空的方法
-    clean_whole () {
+    cleanAll () {
       // 清空数组
-      this.arr = []
+      this.arrGetValue = []
     }
   }
 }
@@ -67,9 +77,6 @@ export default {
 
 <!-- 样式开始 -->
 <style scoped>
-  .big {
-    position:static;
-  }
   .content {
     width: 100%;
     height: 100%;
@@ -86,7 +93,7 @@ export default {
   .nav div a{
     margin-left: 10px;
   }
-  .blok {
+  .container {
     width: 40%;
     background-color: #f9f9f9;
     position: absolute;
@@ -94,14 +101,14 @@ export default {
     transform: translate(-50%)
   }
   /*公共样式*/
-  .utirl{
+  .general{
     width: 100%;
     height: 25%;
     margin: 2.5% 0;
     overflow: hidden;
     /*background-color: #442e2a;*/
   }
-  .blok_input{
+  .container-input{
     margin-top: 40px;
     display: flex;
     flex-flow: row wrap;
@@ -109,17 +116,16 @@ export default {
     justify-content: center;
   }
   /*输入框的样式*/
-  .first_input{
+  .first-input{
     font-size: 16px;
     width: 90%;
     padding-left: 5px;
     height: 50px;
   }
-  .blok_div{
+  .container-div{
     display: block;
-    align-items: center;
   }
-  .add_blok_div{
+  .add-container{
     width: 90%;
     height: 50px;
     padding-left: 5px;
@@ -131,21 +137,18 @@ export default {
     border:2px solid rgb(57, 212, 109)
   }
   /*提示div中的样式 */
-  .add_blok_text{
+  .add-container-text{
     color: rgb(57, 212, 109);
     display: flex;
     flex-direction: row;
     justify-content: center;
   }
-  .add_blok_text img{
+  .add-container-text img{
     width: 25px;
     height: 25px;
     margin-right: 5px;
   }
-  .blok_btn {
-    position: static;
-  }
-  .blok_but_remove {
+  .container-btn-remove {
     text-align: center;
     cursor: pointer;
     padding: 8px;
@@ -157,23 +160,23 @@ export default {
     border-radius: 5px;
   }
   /*按钮鼠标移入时的样式*/
-  .blok_but_remove:hover {
+  .container-btn-remove:hover {
     vertical-align: center;
     color: white;
     background-color: #76b8ff;
   }
-  .blok_but_remove:active {
+  .container-btn-remove:active {
     vertical-align: center;
     color: white;
     background-color: #0096ff;
   }
   /*添加的div排列*/
-  .add_content{
+  .add-content{
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
   }
-  .add_ul {
+  .add-ul {
+    padding: 0;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
