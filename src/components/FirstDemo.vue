@@ -4,7 +4,7 @@
       <a>My First Deom</a>
     </div>
     <div class="container">
-        <div class="general container-input">
+        <div class="general add-container-input">
           <input
            type="text"
            class="first-input"
@@ -14,7 +14,7 @@
           />
         </div>
 
-        <div class="general container-div">
+        <div class="general">
           <div class="add-container" v-show="!arrGetValue.length">
             <div class="add-container-text">
               <img src="../assets/success.png"/>
@@ -24,15 +24,15 @@
         </div>
 
         <ul class="add-ul">
-          <li class="add-content add-container" v-for="item in arrGetValue" :key="item.input_val">
-            <label>{{item.input_val}}</label>
+          <li class="add-content add-container" v-for="(item) in arrGetValue" :key="item.inputVal">
+            <label>{{item.inputVal}}</label>
               <a class="destroy" @click="deleteContent(item)">
                 <img src="../assets/error.png"/>
               </a>
           </li>
         </ul>
 
-        <div class="container-btn">
+        <div class="vessel">
           <div class="container-btn-remove" @click="cleanAll">清空</div>
         </div>
     </div>
@@ -58,7 +58,7 @@ export default {
         alert('请输入')
       } else {
         this.arrGetValue.push({
-          input_val: this.addVal
+          inputVal: this.addVal
         })
         this.addVal = ''
       }
@@ -78,19 +78,24 @@ export default {
 </script>
 
 <!-- 样式开始 -->
-<style scoped>
+<style scoped lang='less'>
+  @container-width: 100%;
+  @container-height: 100%;
+
   .content {
-    width: 100%;
-    height: 100%;
+    width: @container-width;
+    height:  @container-height;
   }
   .nav {
-    width: 100%;
+    width: @container-width;;
     height: 60px;
     line-height: 60px;
     background-color: rgb(219, 219, 219);
-  }
-  .nav div a{
-    margin-left: 10px;
+    div {
+      a{
+        margin-left: 10px;
+      }
+   }
   }
   .container {
     width: 40%;
@@ -99,25 +104,14 @@ export default {
     left: 50%;
     transform: translate(-50%)
   }
-  @media (max-width: 960px){
-    .container {
-    width: 60%;
-    }
-  }
-   @media (max-width: 768px){
-    .container {
-    width: 90%;
-    }
-  }
   /*公共样式*/
   .general{
-    width: 100%;
+    width: @container-width;
     height: 25%;
     margin: 2.5% 0;
     overflow: hidden;
-    /*background-color: #442e2a;*/
   }
-  .container-input{
+  .add-container-input{
     margin-top: 40px;
     display: flex;
     flex-flow: row wrap;
@@ -132,7 +126,7 @@ export default {
     height: 50px;
   }
   .add-container{
-    width: 90%;
+    width: @container-width - 10%;
     height: 50px;
     padding-left: 5px;
     display: flex;
@@ -149,38 +143,35 @@ export default {
     flex-direction: row;
     justify-content: center;
   }
-  .add-container-text img{
+  .add-container-text{
+    img{
     width: 25px;
     height: 25px;
     margin-right: 5px;
+    }
   }
-  .container-btn {
-    text-align: right
-  }
-  .container-btn-remove {
-    display: inline-block;
-    padding: 10px 20px;
-    margin-right: 15px;
-    margin-bottom: 8px;
-    border-radius: 5px;
-  }
-  /*按钮鼠标移入时的样式*/
-  .container-btn-remove:hover {
-    vertical-align: center;
-    cursor: pointer;
-    color: white;
-    background-color: #24fc6c;
-  }
-  .container-btn-remove:active {
-    vertical-align: center;
-      cursor: pointer;
-    color: white;
-    background-color: #69c086;
-  }
-  /*添加的div排列*/
-  .add-content{
-    display: flex;
-    flex-flow: row wrap;
+  .vessel {
+    text-align: right;
+      .container-btn-remove {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-right: 15px;
+      margin-bottom: 8px;
+      border-radius: 5px;
+      /*按钮鼠标移入时的样式*/
+      &:hover {
+        vertical-align: center;
+        cursor: pointer;
+        color: white;
+        background-color: #24fc6c;
+      }
+      &:active {
+        vertical-align: center;
+          cursor: pointer;
+        color: white;
+        background-color: #69c086;
+      }
+    }
   }
   .add-ul {
     padding: 0;
@@ -188,17 +179,29 @@ export default {
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  .destroy img{
+  .destroy {
+    img{
     width: 25px;
     height: 25px;
     cursor: pointer;
     margin-right: 10px;
     vertical-align: center;
+    }
   }
   .footer{
     height: 60px;
     background-color: rgb(219, 219, 219);
     position:fixed;
     bottom: 0;
+  }
+   @media (max-width: 960px){
+    .container {
+    width: @container-width - 45%;
+    }
+  }
+   @media (max-width: 768px){
+    .container {
+    width: @container-width - 10%;
+    }
   }
 </style>
