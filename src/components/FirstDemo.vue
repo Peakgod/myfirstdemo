@@ -32,7 +32,9 @@
           </li>
         </ul>
 
-        <div class="container-btn-remove" @click="cleanAll">清空</div>
+        <div class="container-btn">
+          <div class="container-btn-remove" @click="cleanAll">清空</div>
+        </div>
     </div>
     <div class="footer"></div>
   </div>
@@ -92,10 +94,20 @@ export default {
   }
   .container {
     width: 40%;
-    background-color: #f9f9f9;
+    background-color: #b8ffd0;
     position: absolute;
     left: 50%;
     transform: translate(-50%)
+  }
+  @media (max-width: 960px){
+    .container {
+    width: 60%;
+    }
+  }
+   @media (max-width: 768px){
+    .container {
+    width: 90%;
+    }
   }
   /*公共样式*/
   .general{
@@ -142,26 +154,28 @@ export default {
     height: 25px;
     margin-right: 5px;
   }
+  .container-btn {
+    text-align: right
+  }
   .container-btn-remove {
-    text-align: center;
-    cursor: pointer;
-    padding: 8px;
-    height: 8%;
-    margin-right: 8px;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-right: 15px;
     margin-bottom: 8px;
-    float: right;
     border-radius: 5px;
   }
   /*按钮鼠标移入时的样式*/
   .container-btn-remove:hover {
     vertical-align: center;
+    cursor: pointer;
     color: white;
-    background-color: #76b8ff;
+    background-color: #24fc6c;
   }
   .container-btn-remove:active {
     vertical-align: center;
+      cursor: pointer;
     color: white;
-    background-color: #0096ff;
+    background-color: #69c086;
   }
   /*添加的div排列*/
   .add-content{
@@ -174,9 +188,6 @@ export default {
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  /* .destroy {
-    line-height: 10px;
-  } */
   .destroy img{
     width: 25px;
     height: 25px;
