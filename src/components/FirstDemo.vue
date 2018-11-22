@@ -9,7 +9,7 @@
            type="text"
            class="first-input"
            placeholder= "请添加条目！"
-           v-model="add_val"
+           v-model="addVal"
            @keyup.enter="addInputVal"
           />
         </div>
@@ -24,7 +24,7 @@
         </div>
 
         <ul class="add-ul">
-          <li  class="add-content add-container" v-for="item in arrGetValue" :key="item.input_val">
+          <li class="add-content add-container" v-for="item in arrGetValue" :key="item.input_val">
             <label>{{item.input_val}}</label>
               <a class="destroy" @click="deleteContent(item)">
                 <img src="../assets/error.png"/>
@@ -45,20 +45,20 @@ export default {
   data () {
     return {
       arrGetValue: [],
-      add_val: ''
+      addVal: ''
     }
   },
 
   methods: {
     // 添加的方法ghjgh
     addInputVal () {
-      if (this.add_val === '') {
+      if (this.addVal === '') {
         alert('请输入')
       } else {
         this.arrGetValue.push({
-          input_val: this.add_val
+          input_val: this.addVal
         })
-        this.add_val = ''
+        this.addVal = ''
       }
     },
     // 删除的方法
@@ -86,9 +86,6 @@ export default {
     height: 60px;
     line-height: 60px;
     background-color: rgb(219, 219, 219);
-  }
-  .nav div{
-    vertical-align: middle
   }
   .nav div a{
     margin-left: 10px;
@@ -122,9 +119,6 @@ export default {
     padding-left: 5px;
     height: 50px;
   }
-  .container-div{
-    display: block;
-  }
   .add-container{
     width: 90%;
     height: 50px;
@@ -152,7 +146,6 @@ export default {
     text-align: center;
     cursor: pointer;
     padding: 8px;
-    width: 15%;
     height: 8%;
     margin-right: 8px;
     margin-bottom: 8px;
@@ -181,9 +174,9 @@ export default {
     flex-flow: row wrap;
     justify-content: space-around;
   }
-  .destroy {
+  /* .destroy {
     line-height: 10px;
-  }
+  } */
   .destroy img{
     width: 25px;
     height: 25px;
@@ -192,7 +185,6 @@ export default {
     vertical-align: center;
   }
   .footer{
-    width: 100%;
     height: 60px;
     background-color: rgb(219, 219, 219);
     position:fixed;
